@@ -81,10 +81,10 @@ class MainGui():
                     master=self.tk_root,
                     logger_name="page_camera",
                 ),
-            "page_cursor":
-                pages.PageCursor(
+            "page_head_movement":
+                pages.PageHeadMovement(
                     master=self.tk_root,
-                    logger_name="page_cursor",
+                    logger_name="page_head_movement",
                 ),
             "page_gestures":
                 pages.PageSelectGestures(
@@ -146,7 +146,7 @@ class MainGui():
         logger.info("refresh_profile")
         self.pages["page_gestures"].refresh_profile()
         self.pages["page_camera"].refresh_profile()
-        self.pages["page_cursor"].refresh_profile()
+        self.pages["page_head_movement"].refresh_profile()
         self.pages["page_keyboard"].refresh_profile()
 
     def change_frame_callback(self, command, args: dict):

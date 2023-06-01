@@ -92,18 +92,18 @@ class PageHome(SafeDisposableFrame):
         page_camera_btn.grid(row=3, column=0, padx=80, pady=10, sticky="nw")
 
         # Page cursor btn
-        page_cursor_btn_im = customtkinter.CTkImage(
+        page_head_movement_btn_im = customtkinter.CTkImage(
             Image.open("assets/images/page_cursor_btn.png"), size=BTN_SIZE)
-        page_cursor_btn = customtkinter.CTkButton(
+        page_head_movement_btn = customtkinter.CTkButton(
             master=self,
             text="",
             border_width=0,
             corner_radius=12,
-            image=page_cursor_btn_im,
+            image=page_head_movement_btn_im,
             command=partial(master_callback,
                             command="change_page",
-                            args={"target": "page_cursor"}))
-        page_cursor_btn.grid(row=4, column=0, padx=80, pady=10, sticky="nw")
+                            args={"target": "page_head_movement"}))
+        page_head_movement_btn.grid(row=4, column=0, padx=80, pady=10, sticky="nw")
 
         # Page gestures btn
         page_gestures_btn_im = customtkinter.CTkImage(

@@ -53,7 +53,7 @@ class FrameMenu(SafeDisposableFrame):
                     Image.open("assets/images/menu_btn_camera_selected.png"),
                     size=BTN_SIZE)
             ],
-            "page_cursor": [
+            "page_head_movement": [
                 customtkinter.CTkImage(
                     Image.open("assets/images/menu_btn_cursor.png"),
                     size=BTN_SIZE),

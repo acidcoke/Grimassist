@@ -22,10 +22,11 @@ from PIL import Image
 
 from src.config_manager import ConfigManager
 from src.controllers import MouseController
+from src.controllers.action import Action
 from src.gui.balloon import Balloon
 from src.gui.frames.safe_disposable_frame import SafeDisposableFrame
 
-logger = logging.getLogger("PageCursor")
+logger = logging.getLogger("PageHeadMovement")
 MAX_ROWS = 3
 HELP_ICON_SIZE = (18, 18)
 MAX_HOLD_TRIG = 2000
@@ -34,9 +35,9 @@ MAX_HOLD_TRIG = 2000
 class FrameSelectGesture(SafeDisposableFrame):
 
     def __init__(
-        self,
-        master,
-        **kwargs,
+            self,
+            master,
+            **kwargs,
     ):
         super().__init__(master, **kwargs)
 
@@ -79,7 +80,6 @@ class FrameSelectGesture(SafeDisposableFrame):
         """
 
         for cfg_name, div in self.divs.items():
-
             cfg_value = int(
                 np.clip(ConfigManager().config[cfg_name],
                         a_min=1,
@@ -96,7 +96,6 @@ class FrameSelectGesture(SafeDisposableFrame):
 
         for idx, (show_name, (cfg_name, balloon_text, slider_min,
                               slider_max)) in enumerate(directions.items()):
-
             help_image = self.help_icon if balloon_text != "" else None
             # Label
             label = customtkinter.CTkLabel(master=self,
@@ -132,7 +131,7 @@ class FrameSelectGesture(SafeDisposableFrame):
                 master=self,
                 validate='all',
                 textvariable=entry_var,
-                #validatecommand=vcmd,
+                # validatecommand=vcmd,
                 width=62)
             entry.grid(row=idx,
                        column=0,
@@ -219,7 +218,7 @@ class FrameSelectGesture(SafeDisposableFrame):
         self.load_initial_config()
 
 
-class PageCursor(SafeDisposableFrame):
+class PageHeadMovement(SafeDisposableFrame):
 
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
