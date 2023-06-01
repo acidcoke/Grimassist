@@ -51,6 +51,20 @@ class FrameSelectGesture(SafeDisposableFrame):
         self.shared_info_balloon = Balloon(
             self, image_path="assets/images/balloon.png")
 
+        self.radio_var = tkinter.IntVar(value=0)
+        self.radiobutton_1 = customtkinter.CTkRadioButton(master, text="Cursor",
+                                                          command=self.radiobutton_event, variable=self.radio_var,
+                                                          value=Action.CURSOR.value)
+        self.radiobutton_2 = customtkinter.CTkRadioButton(master, text="Gamepad/Joystick",
+                                                          command=self.radiobutton_event, variable=self.radio_var,
+                                                          value=Action.GAMEPAD.value)
+        self.radiobutton_3 = customtkinter.CTkRadioButton(master, text="Key",
+                                                          command=self.radiobutton_event, variable=self.radio_var,
+                                                          value=Action.REGULAR.value)
+        self.radiobutton_1.grid(row=0, column=0, padx=20, pady=5, sticky="nw")
+        self.radiobutton_2.grid(row=1, column=0, padx=20, pady=5, sticky="nw")
+        self.radiobutton_3.grid(row=2, column=0, padx=20, pady=5, sticky="nw")
+
         # Slider divs
         self.divs = self.create_divs({
             "Move up": ["spd_up", "", 1, 100],
@@ -213,6 +227,9 @@ class FrameSelectGesture(SafeDisposableFrame):
         ConfigManager().set_temp_config(field=div_name, value=new_value)
         ConfigManager().apply_config()
         MouseController().calc_smooth_kernel()
+
+    def radiobutton_event(self):
+        print("radiobutton toggled, current value:", self.radio_var.get())
 
     def inner_refresh_profile(self):
         self.load_initial_config()
