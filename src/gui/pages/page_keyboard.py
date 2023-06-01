@@ -340,8 +340,7 @@ class FrameSelectKeyboard(SafeDisposableScrollableFrame):
         ]
 
         # Not valid key
-        if (keydown_txt in occupied_keys) or (
-                keydown_txt not in shape_list.available_keyboard_keys):
+        if (keydown_txt not in shape_list.available_keyboard_keys):
             logger.info(
                 f"Key action <{keydown_txt}> not found in available list")
             entry_button.configure(image=self.a_button_image)
