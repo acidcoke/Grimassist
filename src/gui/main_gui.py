@@ -134,13 +134,13 @@ class MainGui():
             border_color="gray70",
             anchor="e",
             command=self.frame_profile.show_window)
-        # profile_btn.grid(row=0,
-        #                  column=0,
-        #                  padx=10,
-        #                  pady=10,
-        #                  sticky="ne",
-        #                  columnspan=10,
-        #                  rowspan=10)
+        profile_btn.grid(row=0,
+                         column=0,
+                         padx=10,
+                         pady=10,
+                         sticky="ne",
+                         columnspan=10,
+                         rowspan=10)
 
     def refresh_profile(self):
         logger.info("refresh_profile")
