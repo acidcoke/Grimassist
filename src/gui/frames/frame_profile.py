@@ -244,7 +244,7 @@ class FrameProfileItems(SafeDisposableScrollableFrame):
         div["entry"].icursor("end")
 
     def check_profile_name_valid(self, div, var, index, mode):
-        pattern = re.compile(r'^[a-zA-Z0-9_-]+$')
+        pattern = re.compile(r'^[ a-zA-Z0-9_ -]+$')
         is_valid_input = bool(pattern.match(div["entry_var"].get()))
 
         # Change border color
