@@ -1,0 +1,10 @@
+{
+    "name": "profile_2",
+    "fix_width": 640,
+    "fix_height": 480,
+    "camera_id": 0,
+    "shape_smooth": 10,
+    "tick_interval_ms": 16,
+    "hold_trigger_ms": 500,
+    "auto_play": false
+}
