@@ -62,14 +62,14 @@ class MouseController(metaclass=Singleton):
             self.calc_smooth_kernel()
 
             self.is_enabled = tk.BooleanVar()
-            self.is_enabled.set(ConfigManager().config["enable"])
+            self.is_enabled.set(ConfigManager().cursor_config["enable_cursor"])
 
             self.stop_flag = threading.Event()
             self.pool.submit(self.main_loop)
             self.is_started = True
 
     def calc_smooth_kernel(self):
-        new_pointer_smooth = ConfigManager().config["pointer_smooth"]
+        new_pointer_smooth = ConfigManager().cursor_config["pointer_smooth"]
         if self.smooth_kernel is None:
             self.smooth_kernel = utils.calc_smooth_kernel(new_pointer_smooth)
 
@@ -81,14 +81,14 @@ class MouseController(metaclass=Singleton):
 
     def asymmetry_scale(self, vel_x, vel_y):
         if vel_x > 0:
-            vel_x *= ConfigManager().config["spd_right"]
+            vel_x *= ConfigManager().cursor_config["spd_right"]
         else:
-            vel_x *= ConfigManager().config["spd_left"]
+            vel_x *= ConfigManager().cursor_config["spd_left"]
 
         if vel_y > 0:
-            vel_y *= ConfigManager().config["spd_down"]
+            vel_y *= ConfigManager().cursor_config["spd_down"]
         else:
-            vel_y *= ConfigManager().config["spd_up"]
+            vel_y *= ConfigManager().cursor_config["spd_up"]
 
         return vel_x, vel_y
 
@@ -128,14 +128,14 @@ class MouseController(metaclass=Singleton):
 
             vel_x, vel_y = self.asymmetry_scale(vel_x, vel_y)
 
-            if ConfigManager().config["mouse_acceleration"]:
+            if ConfigManager().cursor_config["mouse_acceleration"]:
                 vel_x *= self.accel(vel_x)
                 vel_y *= self.accel(vel_y)
 
             # pydirectinput is not working here
             pyautogui.move(xOffset=vel_x, yOffset=vel_y)            
 
-            time.sleep(ConfigManager().config["tick_interval_ms"] / 1000)
+            time.sleep(ConfigManager().profile_config["tick_interval_ms"] / 1000)
 
     def set_enabled(self, flag: bool) -> None:
         self.is_enabled.set(flag)

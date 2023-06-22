@@ -103,7 +103,7 @@ class PageSelectCamera(SafeDisposableFrame):
             radios.append(radio)
 
         # Set radio select
-        target_id = ConfigManager().config["camera_id"]
+        target_id = ConfigManager().profile_config["camera_id"]
         self.radios = radios
         for radio in self.radios:
             if f"Camera {target_id}" == radio.cget("text"):
@@ -119,8 +119,8 @@ class PageSelectCamera(SafeDisposableFrame):
             return
         logger.info(f"Change cameara: {new_radio_value}")
         CameraManager().pick_camera(new_radio_value)
-        ConfigManager().set_temp_config("camera_id", new_radio_value)
-        ConfigManager().apply_config()
+        ConfigManager().set_temp_profile_config("camera_id", new_radio_value)
+        ConfigManager().apply_profile_config()
         self.prev_radio_value = new_radio_value
 
     def page_loop(self):
@@ -137,7 +137,7 @@ class PageSelectCamera(SafeDisposableFrame):
             self.canvas.itemconfig(self.canvas_im, image=self.new_photo)
             self.canvas.update()
 
-            self.after(ConfigManager().config["tick_interval_ms"],
+            self.after(ConfigManager().profile_config["tick_interval_ms"],
                        self.page_loop)
 
     def enter(self):
@@ -147,5 +147,5 @@ class PageSelectCamera(SafeDisposableFrame):
 
     def refresh_profile(self):
         self.load_initial_config()
-        new_camera_id = ConfigManager().config["camera_id"]
+        new_camera_id = ConfigManager().profile_config["camera_id"]
         CameraManager().pick_camera(new_camera_id)

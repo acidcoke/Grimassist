@@ -139,9 +139,9 @@ class CameraManager(metaclass=Singleton):
 
         # Active
 
-        if ConfigManager().config["use_transformation_matrix"]:
-            cx = ConfigManager().config["fix_width"] // 2
-            cy = ConfigManager().config["fix_height"] // 2
+        if ConfigManager().cursor_config["use_transformation_matrix"]:
+            cx = ConfigManager().profile_config["fix_width"] // 2
+            cy = ConfigManager().profile_config["fix_height"] // 2
             cv2.line(self.frame_buffers["debug"], (cx, cy),
                      (int(track_loc[0]), int(track_loc[1])), (0, 255, 0), 3)
 
@@ -192,7 +192,7 @@ class ThreadCameras():
         """
         logger.info(f"Assign cameras completed. Found {self.caps}")
 
-        init_id = ConfigManager().config["camera_id"]
+        init_id = ConfigManager().profile_config["camera_id"]
 
         # pick first camera available if camera in config not found
         if init_id not in self.caps:
@@ -262,11 +262,11 @@ class ThreadCameras():
 
             frame.flags.writeable = False
             h, w, _ = frame.shape
-            if h != ConfigManager().config["fix_height"] or w != ConfigManager(
-            ).config["fix_width"]:
+            if h != ConfigManager().profile_config["fix_height"] or w != ConfigManager(
+            ).profile_config["fix_width"]:
                 frame = cv2.resize(frame,
-                                   (ConfigManager().config["fix_width"],
-                                    ConfigManager().config["fix_height"]))
+                                   (ConfigManager().profile_config["fix_width"],
+                                    ConfigManager().profile_config["fix_height"]))
             frame = cv2.flip(frame, 1)
             self.frame_buffers["raw"] = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

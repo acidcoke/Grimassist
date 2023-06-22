@@ -97,7 +97,7 @@ class FrameSelectGesture(SafeDisposableFrame):
             onvalue=1,
             offvalue=0,
         )
-        if ConfigManager().config["enable"]:
+        if ConfigManager().cursor_config["enable_cursor"]:
             self.toggle_switch.select()
 
         self.toggle_switch.grid(row=0,
@@ -114,11 +114,17 @@ class FrameSelectGesture(SafeDisposableFrame):
         """
 
         for cfg_name, div in self.divs.items():
+            if cfg_name in ConfigManager().profile_config:
+                cfg_value = int(
+                    np.clip(ConfigManager().profile_config[cfg_name],
+                            a_min=1,
+                            a_max=MAX_HOLD_TRIG))
+            elif cfg_name in ConfigManager().cursor_config:
+                cfg_value = int(
+                    np.clip(ConfigManager().cursor_config[cfg_name],
+                            a_min=1,
+                            a_max=MAX_HOLD_TRIG))
 
-            cfg_value = int(
-                np.clip(ConfigManager().config[cfg_name],
-                        a_min=1,
-                        a_max=MAX_HOLD_TRIG))
             div["slider"].set(cfg_value)
             # Temporary remove trace, adjust the value and put it back
             div["entry_var"].trace_vdelete("w", div["entry_trace_id"])
@@ -225,8 +231,12 @@ class FrameSelectGesture(SafeDisposableFrame):
 
             # Don't update config when dragging
             if not self.slider_dragging:
-                ConfigManager().set_temp_config(field=div_name, value=new_value)
-                ConfigManager().apply_config()
+                if div_name in ConfigManager().profile_config:
+                    ConfigManager().set_temp_profile_config(field=div_name, value=new_value)
+                    ConfigManager().apply_profile_config()
+                elif div_name in ConfigManager().cursor_config:
+                    ConfigManager().set_temp_cursor_config(field=div_name, value=new_value)
+                    ConfigManager().apply_cursor_config()
                 MouseController().calc_smooth_kernel()
         else:
             div["entry"].configure(fg_color="#ee9e9d")
@@ -267,9 +277,9 @@ class FrameSelectGesture(SafeDisposableFrame):
                 slider.configure(state="disabled", fg_color="lightgray", progress_color="gray", button_color="gray")
                 div["slider"] = slider
                 new.update({cfg_name: div})
-        self.divs=new
-        ConfigManager().set_temp_config(field="enable", value=new_state)
-        ConfigManager().apply_config()
+        self.divs = new
+        ConfigManager().set_temp_cursor_config(field="enable_cursor", value=new_state)
+        ConfigManager().apply_cursor_config()
 
     def cursor_toggle_callback(self, command, args: dict):
         logger.info(f"cursor_toggle_callback {command} with {args}")

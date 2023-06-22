@@ -78,7 +78,7 @@ class FrameCamPreview(SafeDisposableFrame):
             onvalue=1,
             offvalue=0,
         )
-        if ConfigManager().config["auto_play"]:
+        if ConfigManager().profile_config["auto_play"]:
             self.toggle_switch.select()
 
         self.toggle_switch.grid(row=1,
@@ -123,7 +123,7 @@ class FrameCamPreview(SafeDisposableFrame):
             self.canvas.itemconfig(self.canvas_image, image=self.new_photo)
             self.canvas.update()
 
-            self.after(ConfigManager().config["tick_interval_ms"],
+            self.after(ConfigManager().profile_config["tick_interval_ms"],
                        self.camera_loop)
 
     def enter(self):

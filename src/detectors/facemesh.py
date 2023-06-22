@@ -66,11 +66,11 @@ class FaceMesh(metaclass=Singleton):
 
     def calc_smooth_kernel(self):
         self.smooth_kernel = utils.calc_smooth_kernel(
-            ConfigManager().config["shape_smooth"])
+            ConfigManager().profile_config["shape_smooth"])
 
     def calc_track_loc(self, mp_result, use_transformation_matrix=False):
-        screen_w = ConfigManager().config["fix_width"]
-        screen_h = ConfigManager().config["fix_height"]
+        screen_w = ConfigManager().profile_config["fix_width"]
+        screen_h = ConfigManager().profile_config["fix_height"]
         landmarks = mp_result.face_landmarks[0]
 
         if use_transformation_matrix:
@@ -90,7 +90,7 @@ class FaceMesh(metaclass=Singleton):
             axs = []
             ays = []
 
-            for p in ConfigManager().config["tracking_vert_idxs"]:
+            for p in ConfigManager().cursor_config["tracking_vert_idxs"]:
                 px = landmarks[p].x * screen_w
                 py = landmarks[p].y * screen_h
                 axs.append(px)
@@ -109,7 +109,7 @@ class FaceMesh(metaclass=Singleton):
             self.track_loc = self.calc_track_loc(
                 mp_result,
                 use_transformation_matrix=ConfigManager(
-                ).config["use_transformation_matrix"])
+                ).cursor_config["use_transformation_matrix"])
             self.blendshapes_buffer = np.roll(self.blendshapes_buffer,
                                               shift=-1,
                                               axis=0)

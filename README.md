@@ -46,7 +46,7 @@ pip install -r requirements.txt
 # Configs
 ## Basic config
 
->[cursor.json](configs/default/cursor.json)  
+>[profile.json](configs/default/profile.json)  
 
 |           |                                       |
 |-----------|---------------------------------------|

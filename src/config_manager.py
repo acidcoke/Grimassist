@@ -36,10 +36,12 @@ class ConfigManager(metaclass=Singleton):
     def __init__(self):
         logger.info("Intialize ConfigManager singleton")
         self.version = VERSION
-        self.unsave_configs = False
+        self.unsave_profile_configs = False
+        self.unsave_cursor_configs = False
         self.unsave_mouse_bindings = False
         self.unsave_keyboard_bindings = False
-        self.config = None
+        self.profile_config = None
+        self.cursor_config = None
 
         # Load config
         self.curr_profile_path = None
@@ -92,21 +94,27 @@ class ConfigManager(metaclass=Singleton):
         profile_path = Path(DEFAULT_JSON.parent, profile_name)
         logger.info(f"Loading profile: {profile_path}")
 
+        profile_config_file = Path(profile_path, "profile.json")
         cursor_config_file = Path(profile_path, "cursor.json")
         mouse_bindings_file = Path(profile_path, "mouse_bindings.json")
         keyboard_bindings_file = Path(profile_path, "keyboard_bindings.json")
 
-        if (not cursor_config_file.is_file()) or (
-                not mouse_bindings_file.is_file()) or (
-                    not keyboard_bindings_file.is_file()):
+        if (not profile_config_file.is_file()) or (
+                not cursor_config_file.is_file()) or (
+                    not mouse_bindings_file.is_file()) or (
+                        not keyboard_bindings_file.is_file()):
             logger.critical(
                 f"{profile_path.as_posix()} Invalid configuration files or missing files, exit program..."
             )
             raise FileNotFoundError
 
+        # Load profile config
+        with open(profile_config_file) as f:
+            self.profile_config = json.load(f)
+
         # Load cursor config
         with open(cursor_config_file) as f:
-            self.config = json.load(f)
+            self.cursor_config = json.load(f)
 
         # Load mouse bindings
         with open(mouse_bindings_file) as f:
@@ -116,7 +124,8 @@ class ConfigManager(metaclass=Singleton):
         with open(keyboard_bindings_file) as f:
             self.keyboard_bindings = json.load(f)
 
-        self.temp_config = copy.deepcopy(self.config)
+        self.temp_profile_config = copy.deepcopy(self.profile_config)
+        self.temp_cursor_config = copy.deepcopy(self.cursor_config)
         self.temp_mouse_bindings = copy.deepcopy(self.mouse_bindings)
         self.temp_keyboard_bindings = copy.deepcopy(self.keyboard_bindings)
 
@@ -131,22 +140,41 @@ class ConfigManager(metaclass=Singleton):
 
     # ------------------------------- BASIC CONFIG ------------------------------- #
 
-    def set_temp_config(self, field: str, value):
+    def set_temp_profile_config(self, field: str, value):
         logger.info(f"Setting {field} to {value}")
-        self.temp_config[field] = value
-        self.unsave_configs = True
+        self.temp_profile_config[field] = value
+        self.unsave_profile_configs = True
 
-    def write_config_file(self):
+    def write_profile_config_file(self):
+        profile_config_file = Path(self.curr_profile_path, "profile.json")
+        logger.info(f"Writing config file {profile_config_file}")
+        with open(profile_config_file, 'w') as f:
+            json.dump(self.profile_config, f, indent=4, separators=(', ', ': '))
+
+    def apply_profile_config(self):
+        logger.info("Applying config")
+        self.profile_config = copy.deepcopy(self.temp_profile_config)
+        self.write_profile_config_file()
+        self.unsave_profile_configs = False
+
+    # ------------------------------- CURSOR CONFIG ------------------------------- #
+
+    def set_temp_cursor_config(self, field: str, value):
+        logger.info(f"Setting {field} to {value}")
+        self.temp_cursor_config[field] = value
+        self.unsave_cursor_configs = True
+
+    def write_cursor_config_file(self):
         cursor_config_file = Path(self.curr_profile_path, "cursor.json")
         logger.info(f"Writing config file {cursor_config_file}")
         with open(cursor_config_file, 'w') as f:
-            json.dump(self.config, f, indent=4, separators=(', ', ': '))
+            json.dump(self.cursor_config, f, indent=4, separators=(', ', ': '))
 
-    def apply_config(self):
+    def apply_cursor_config(self):
         logger.info("Applying config")
-        self.config = copy.deepcopy(self.temp_config)
-        self.write_config_file()
-        self.unsave_configs = False
+        self.cursor_config = copy.deepcopy(self.temp_cursor_config)
+        self.write_cursor_config_file()
+        self.unsave_cursor_configs = False
 
     # ------------------------------ MOUSE BINDINGS CONFIG ----------------------------- #
 
@@ -254,7 +282,8 @@ class ConfigManager(metaclass=Singleton):
 
     # ---------------------------------------------------------------------------- #
     def apply_all(self):
-        self.apply_config()
+        self.apply_profile_config()
+        self.apply_cursor_config()
         self.apply_mouse_bindings()
         self.apply_keyboard_bindings()
 

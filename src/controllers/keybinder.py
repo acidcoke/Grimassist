@@ -53,7 +53,7 @@ class Keybinder(metaclass=Singleton):
             self.is_started = True
 
             self.is_active = tk.BooleanVar()
-            self.is_active.set(ConfigManager().config["auto_play"])
+            self.is_active.set(ConfigManager().profile_config["auto_play"])
 
     def init_states(self) -> None:
         """Re initializes the state of the keybinder.
@@ -120,7 +120,7 @@ class Keybinder(metaclass=Singleton):
 
                 if not self.holding and (
                     ((time.time() - self.start_hold_ts) * 1000) >=
-                        ConfigManager().config["hold_trigger_ms"]):
+                        ConfigManager().profile_config["hold_trigger_ms"]):
 
                     pydirectinput.mouseDown(button=action)
                     self.holding = True
