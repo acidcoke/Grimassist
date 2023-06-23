@@ -117,7 +117,7 @@ class PageSelectCamera(SafeDisposableFrame):
         new_radio_value = self.radio_var.get()
         if new_radio_value == self.prev_radio_value:
             return
-        logger.info(f"Change cameara: {new_radio_value}")
+        logger.info(f"Change camera: {new_radio_value}")
         CameraManager().pick_camera(new_radio_value)
         ConfigManager().set_temp_profile_config("camera_id", new_radio_value)
         ConfigManager().apply_profile_config()

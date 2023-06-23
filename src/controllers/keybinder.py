@@ -35,13 +35,13 @@ pydirectinput.FAILSAFE = False
 class Keybinder(metaclass=Singleton):
 
     def __init__(self) -> None:
-        logger.info("Intialize Keybinder singleton")
+        logger.info("Initialize Keybinder singleton")
         self.top_count = 0
         self.triggered = False
         self.start_hold_ts = math.inf
         self.holding = False
         self.is_started = False
-        self.last_know_keybinds = {}
+        self.last_know_keybindings = {}
         self.is_active = None
 
     def start(self):
@@ -56,8 +56,8 @@ class Keybinder(metaclass=Singleton):
             self.is_active.set(ConfigManager().profile_config["auto_play"])
 
     def init_states(self) -> None:
-        """Re initializes the state of the keybinder.
-           If new keybinds are added.
+        """Re-initializes the state of the keybinder.
+           If new keybindings are added.
         """
         # keep states for all registered keys.
         self.key_states = {}
@@ -65,7 +65,7 @@ class Keybinder(metaclass=Singleton):
                      ConfigManager().keyboard_bindings).items():
             self.key_states[v[0] + "_" + v[1]] = False
         self.key_states["holding"] = False
-        self.last_know_keybinds = copy.deepcopy(
+        self.last_know_keybindings = copy.deepcopy(
             (ConfigManager().mouse_bindings |
              ConfigManager().keyboard_bindings))
 
@@ -160,7 +160,7 @@ class Keybinder(metaclass=Singleton):
             return
 
         if (ConfigManager().mouse_bindings |
-                ConfigManager().keyboard_bindings) != self.last_know_keybinds:
+            ConfigManager().keyboard_bindings) != self.last_know_keybindings:
             self.init_states()
 
         for shape_name, v in (ConfigManager().mouse_bindings |
@@ -237,5 +237,5 @@ class Keybinder(metaclass=Singleton):
         self.set_active(not curr_state)
 
     def destroy(self):
-        """Destroy the keybinder"""
+        """Destroy the Keybinder"""
         return

@@ -76,7 +76,6 @@ class FrameProfileItems(SafeDisposableScrollableFrame):
 
         div_id = self.get_div_id(ConfigManager().curr_profile_name.get())
         self.set_div_selected(self.divs[div_id])
-        
 
     def load_initial_profiles(self):
         """Create div according to profiles in config
@@ -491,7 +490,7 @@ class FrameProfile(SafeDisposableFrame):
                        columnspan=1,
                        rowspan=1)
 
-        # Add  butotn
+        # Add button
         add_button = customtkinter.CTkButton(master=self.float_window,
                                              text="+ Add profile",
                                              fg_color="white",

@@ -53,7 +53,7 @@ class MainApp(gui.MainGui, Pipeline):
     def close_all(self):
         logging.info("Close all")
         self.is_active = False
-        # Completely clost this process
+        # Completely close this process
         TaskKiller().exit()
 
 

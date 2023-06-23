@@ -64,7 +64,7 @@ class FrameSelectGesture(SafeDisposableFrame):
         # Divs
         self.divs = self.create_divs(shape_list.available_actions_keys,
                                      shape_list.available_gestures_keys)
-        self.load_initial_keybinds()
+        self.load_initial_keybindings()
         self.slider_dragging = False
 
     def set_div_inactive(self, div):
@@ -88,7 +88,7 @@ class FrameSelectGesture(SafeDisposableFrame):
         div["slider"].grid()
         div["volume_bar"].grid()
 
-    def load_initial_keybinds(self):
+    def load_initial_keybindings(self):
         """Load default from config and set the UI
         """
 
@@ -309,11 +309,11 @@ class FrameSelectGesture(SafeDisposableFrame):
 
     def inner_refresh_profile(self):
         # Create new divs form the new profile
-        self.load_initial_keybinds()
+        self.load_initial_keybindings()
 
     def enter(self):
         super().enter()
-        #self.load_initial_keybinds()
+        # self.load_initial_keybindings()
         self.after(1, self.frame_loop)
 
     def leave(self):

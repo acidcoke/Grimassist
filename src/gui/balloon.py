@@ -41,7 +41,7 @@ class Balloon():
             self.float_window,
             text="",
             compound='center',
-            #anchor="nw",
+            # anchor="nw",
             justify='left',
             width=BALLOON_SIZE[0],
             height=BALLOON_SIZE[1],

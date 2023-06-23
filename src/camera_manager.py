@@ -46,7 +46,7 @@ def add_overlay(background, overlay, x, y, width, height):
 class CameraManager(metaclass=Singleton):
 
     def __init__(self):
-        logger.info("Intialize CameraManager singleton")
+        logger.info("Initialize CameraManager singleton")
         self.thread_cameras = None
 
         # Load placeholder image
@@ -163,7 +163,7 @@ class CameraManager(metaclass=Singleton):
 class ThreadCameras():
 
     def __init__(self, frame_buffers: dict):
-        logger.info("Intializing Threadcamera")
+        logger.info("Initializing Threadcamera")
         self.lock = threading.Lock()
         self.pool = futures.ThreadPoolExecutor(max_workers=8)
         self.stop_flag = threading.Event()

@@ -65,7 +65,7 @@ pip install -r requirements.txt
 | use_transformation_matrix  | Control cursor using head direction (tracking_vert_idxs will be ignored)   |
  
 
-## Keybinds configs
+## Keybinding configs
 >[mouse_bindings.json](configs/default/mouse_bindings.json)  
 >[keyboard_bindings.json](configs/default/keyboard_bindings.json) 
 
