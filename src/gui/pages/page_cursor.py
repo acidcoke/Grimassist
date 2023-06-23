@@ -34,9 +34,9 @@ MAX_HOLD_TRIG = 2000
 class FrameSelectGesture(SafeDisposableFrame):
 
     def __init__(
-        self,
-        master,
-        **kwargs,
+            self,
+            master,
+            **kwargs,
     ):
         super().__init__(master, **kwargs)
 
@@ -82,7 +82,7 @@ class FrameSelectGesture(SafeDisposableFrame):
                                padx=(20, 0),
                                pady=5,
                                sticky="nw")
-        
+
         # Toggle switch
         self.toggle_switch = customtkinter.CTkSwitch(
             master=self,
@@ -106,8 +106,6 @@ class FrameSelectGesture(SafeDisposableFrame):
                                 pady=5,
                                 sticky="nw")
         self.load_initial_config()
-
-
 
     def load_initial_config(self):
         """Load default from config and set the UI
@@ -137,7 +135,6 @@ class FrameSelectGesture(SafeDisposableFrame):
 
         for idx, (show_name, (cfg_name, balloon_text, slider_min,
                               slider_max)) in enumerate(directions.items()):
-
             help_image = self.help_icon if balloon_text != "" else None
             # Label
             label = customtkinter.CTkLabel(master=self,
@@ -146,7 +143,7 @@ class FrameSelectGesture(SafeDisposableFrame):
                                            text=show_name,
                                            justify=tkinter.LEFT)
             label.cget("font").configure(weight='bold')
-            label.grid(row=idx+2, column=0, padx=20, pady=(10, 10), sticky="nw")
+            label.grid(row=idx + 2, column=0, padx=20, pady=(10, 10), sticky="nw")
             self.shared_info_balloon.register_widget(label, balloon_text)
 
             # Slider
@@ -162,7 +159,7 @@ class FrameSelectGesture(SafeDisposableFrame):
                         partial(self.slider_mouse_down_callback, cfg_name))
             slider.bind("<ButtonRelease-1>",
                         partial(self.slider_mouse_up_callback, cfg_name))
-            slider.grid(row=idx+2, column=0, padx=30, pady=(40, 10), sticky="nw")
+            slider.grid(row=idx + 2, column=0, padx=30, pady=(40, 10), sticky="nw")
 
             # Number entry
             entry_var = tkinter.StringVar()
@@ -173,9 +170,9 @@ class FrameSelectGesture(SafeDisposableFrame):
                 master=self,
                 validate='all',
                 textvariable=entry_var,
-                #validatecommand=vcmd,
+                # validatecommand=vcmd,
                 width=62)
-            entry.grid(row=idx+2,
+            entry.grid(row=idx + 2,
                        column=0,
                        padx=(300, 5),
                        pady=(34, 10),
@@ -256,15 +253,19 @@ class FrameSelectGesture(SafeDisposableFrame):
         self.slider_dragging = False
         div = self.divs[div_name]
         new_value = int(div["entry_var"].get())
-        ConfigManager().set_temp_config(field=div_name, value=new_value)
-        ConfigManager().apply_config()
+        if div_name in ConfigManager().profile_config:
+            ConfigManager().set_temp_profile_config(field=div_name, value=new_value)
+            ConfigManager().apply_profile_config()
+        elif div_name in ConfigManager().cursor_config:
+            ConfigManager().set_temp_cursor_config(field=div_name, value=new_value)
+            ConfigManager().apply_cursor_config()
         MouseController().calc_smooth_kernel()
 
     def inner_refresh_profile(self):
         self.load_initial_config()
 
     def enable_cursor(self, new_state: bool):
-        new={}
+        new = {}
         if new_state:
             for cfg_name, div in self.divs.items():
                 slider = div["slider"]
