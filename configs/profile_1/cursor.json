@@ -1,4 +1,5 @@
 {
+    "enable_cursor": 1,
     "tracking_vert_idxs": [
         8
     ], 
@@ -8,6 +9,5 @@
     "spd_right": 40, 
     "pointer_smooth": 6,
     "mouse_acceleration": false, 
-    "use_transformation_matrix": false,
-    "enable_cursor": 1
+    "use_transformation_matrix": false
 }
