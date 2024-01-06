@@ -9,7 +9,7 @@ if platform.system() == "Windows":
 else:
     import pyautogui as pyinput
 
-import win32api
+import screeninfo
 import tkinter as tk
 
 import src.shape_list as shape_list
@@ -67,16 +67,16 @@ class Keybinder(metaclass=Singleton):
 
     def get_monitors(self) -> list[dict]:
         out_list = []
-        monitors = win32api.EnumDisplayMonitors()
-        for i, (_, _, loc) in enumerate(monitors):
+        monitors = screeninfo.get_monitors()
+        for i, monitor in enumerate(monitors):
             mon_info = {}
             mon_info["id"] = i
-            mon_info["x1"] = loc[0]
-            mon_info["y1"] = loc[1]
-            mon_info["x2"] = loc[2]
-            mon_info["y2"] = loc[3]
-            mon_info["center_x"] = (loc[0] + loc[2]) // 2
-            mon_info["center_y"] = (loc[1] + loc[3]) // 2
+            mon_info["x1"] = monitor.x
+            mon_info["y1"] = monitor.y
+            mon_info["x2"] = monitor.width
+            mon_info["y2"] = monitor.height
+            mon_info["center_x"] = (monitor.x + monitor.width) // 2
+            mon_info["center_y"] = (monitor.y + monitor.height) // 2
             out_list.append(mon_info)
 
         return out_list
