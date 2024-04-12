@@ -75,13 +75,14 @@ available_actions = {
     "Mouse middle click": ["mouse", "middle"],
     "Mouse pause / unpause": ["meta", "pause"],
     "Reset cursor to center": ["meta", "reset"],
-    "Switch focus between monitors": ["meta", "cycle"]
+    "Switch focus between monitors": ["meta", "cycle"],
 }
 available_actions_keys = list(available_actions.keys())
 available_actions_values = list(available_actions.values())
 
 available_gestures = {
-    name: "assets/images/dropdowns/" + name + ".png" for name in (
+    name: "assets/images/dropdowns/" + name + ".png"
+    for name in (
         "None",
         "Eye blink right",
         "Eye blink left",
@@ -114,7 +115,6 @@ keyboard_keys = {
     "7": "7",
     "8": "8",
     "9": "9",
-
     # Functions
     "f1": "f1",
     "f2": "f2",
@@ -128,7 +128,6 @@ keyboard_keys = {
     "f10": "f10",
     "f11": "f11",
     "f12": "f12",
-
     # Letters
     "a": "a",
     "b": "b",
@@ -156,7 +155,6 @@ keyboard_keys = {
     "x": "x",
     "y": "y",
     "z": "z",
-
     # Special characters
     "exclam": "!",
     "at": "@",
@@ -180,7 +178,7 @@ keyboard_keys = {
     "semicolon": ";",
     "colon": ":",
     "apostrophe": "'",
-    "quotedbl": "\"",
+    "quotedbl": '"',
     "grave": "`",
     "comma": ",",
     "less": "<",
@@ -190,7 +188,6 @@ keyboard_keys = {
     "asciitilde": "~",
     "bar": "|",
     "period": ".",
-
     # Miscellaneous
     "return": "enter",
     "backspace": "backspace",
@@ -210,7 +207,6 @@ keyboard_keys = {
     "alt_l": "altleft",
     "alt_r": "altright",
     "num_lock": "numlock",
-
     # Directions
     "up": "up",
     "down": "down",

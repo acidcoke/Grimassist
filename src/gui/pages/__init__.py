@@ -1,6 +1,10 @@
 __all__ = [
-    'PageCursor', 'PageHome', 'PageKeyboard', 'PageSelectCamera'
-    , 'PageSelectGestures', 'PageAbout'
+    "PageCursor",
+    "PageHome",
+    "PageKeyboard",
+    "PageSelectCamera",
+    "PageSelectGestures",
+    "PageAbout",
 ]
 from .page_cursor import PageCursor
 from .page_home import PageHome
