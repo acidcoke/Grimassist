@@ -150,8 +150,6 @@ class PageAbout(SafeDisposableFrame):
         add_address_tags(
             self,
             (
-                "https://acecentre.org.uk",
-                "https://github.com/AceCentre/FaceCommander",
                 "https://www.flaticon.com/free-icons/eye",
                 "https://github.com/acidcoke/Grimassist/",
                 "https://github.com/google/project-gameface",
@@ -176,21 +174,12 @@ class PageAbout(SafeDisposableFrame):
         # () is given.
         self.text.insert(
             "1.0",
-            "About FaceCommander\n",
+            "About Grimassist\n",
             "h1",
             f"Version {ConfigManager().version}\n"
             "Control and move the pointer using head movements and facial"
             " gestures.\nDisclaimer: This software isn't intended for medical"
-            " use.\nFaceCommander is an ",
-            (),
-            "Open Source project",
-            tags_for("https://github.com/AceCentre/FaceCommander"),
-            " developed by the Ace Centre. Visit ",
-            (),
-            "our website",
-            tags_for("https://acecentre.org.uk"),
-            " to find out more about how we provide support for people with"
-            " complex communications difficulties.\n",
+            " use.\nGrimassist is an Open Source project\n",
             (),
             "Attribution\n",
             "h2",
@@ -198,11 +187,7 @@ class PageAbout(SafeDisposableFrame):
             (),
             "Eye icons created by Kiranshastry - Flaticon",
             tags_for("https://www.flaticon.com/free-icons/eye"),
-            ".\nThis software was based on ",
-            (),
-            "Grimassist",
-            tags_for("https://github.com/acidcoke/Grimassist/"),
-            ", itself based on ",
+            ".\nThis software is based on ",
             (),
             "Google GameFace",
             tags_for("https://github.com/google/project-gameface"),
