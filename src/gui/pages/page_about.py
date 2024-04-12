@@ -7,15 +7,14 @@ import logging
 #
 # Object oriented path handling.
 # https://docs.python.org/3/library/pathlib.html
-from pathlib import Path
 
 #
 # Tcl/Tk user interface module.
 # https://docs.python.org/3/library/tkinter.html
 # https://tkdocs.com/tutorial/text.html
 from tkinter import Text
-from tkinter.ttk import Frame, Label
-from tkinter.font import Font, families as font_families
+from tkinter.ttk import Label
+from tkinter.font import Font
 
 #
 # Browser launcher module.
