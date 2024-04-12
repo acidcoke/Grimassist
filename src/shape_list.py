@@ -23,8 +23,8 @@ blendshape_names = [
     "cheekPuff",
     "cheekSquintRight",
     "cheekSquintLeft",
-    "eyeBlinkRight",
-    "eyeBlinkLeft",
+    "Eye blink right",
+    "Eye blink left",
     "eyeLookDownRight",
     "eyeLookDownLeft",
     "eyeLookInRight",
@@ -81,16 +81,22 @@ available_actions_keys = list(available_actions.keys())
 available_actions_values = list(available_actions.values())
 
 available_gestures = {
-    "None": "assets/images/dropdowns/None.png",
-    "Open mouth": "assets/images/dropdowns/Open mouth.png",
-    "Mouth left": "assets/images/dropdowns/Mouth left.png",
-    "Mouth right": "assets/images/dropdowns/Mouth right.png",
-    "Roll lower mouth": "assets/images/dropdowns/Roll lower mouth.png",
-    "Raise left eyebrow": "assets/images/dropdowns/Raise left eyebrow.png",
-    "Lower left eyebrow": "assets/images/dropdowns/Lower left eyebrow.png",
-    "Raise right eyebrow": "assets/images/dropdowns/Raise right eyebrow.png",
-    "Lower right eyebrow": "assets/images/dropdowns/Lower right eyebrow.png",
+    name: "assets/images/dropdowns/" + name + ".png" for name in (
+        "None",
+        "Eye blink right",
+        "Eye blink left",
+        "Open mouth",
+        "Mouth left",
+        "Mouth right",
+        "Roll lower mouth",
+        "Raise left eyebrow",
+        "Lower left eyebrow",
+        "Raise right eyebrow",
+        "Lower right eyebrow",
+    )
 }
+
+
 for k, v in available_gestures.items():
     assert k in blendshape_names, f"{k} not in blendshape_names"
 available_gestures_keys = list(available_gestures.keys())

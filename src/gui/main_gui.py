@@ -4,7 +4,8 @@ import customtkinter
 from src.gui import frames
 from src.config_manager import ConfigManager
 from src.controllers import Keybinder, MouseController
-from src.gui.pages import PageSelectCamera, PageCursor, PageSelectGestures, PageKeyboard
+from src.gui.pages import (
+    PageSelectCamera, PageCursor, PageSelectGestures, PageKeyboard, PageAbout)
 
 customtkinter.set_appearance_mode("light")
 customtkinter.set_default_color_theme("assets/themes/google_theme.json")
@@ -55,18 +56,11 @@ class MainGui():
 
         # Create all wizard pages and grid them.
         self.pages = [
-                PageSelectCamera(
-                    master=self.tk_root,
-                ),
-                PageCursor(
-                    master=self.tk_root,
-                ),
-                PageSelectGestures(
-                    master=self.tk_root,
-                ),
-                PageKeyboard(
-                    master=self.tk_root,
-                )
+            PageSelectCamera(master=self.tk_root,),
+            PageCursor(master=self.tk_root,),
+            PageSelectGestures(master=self.tk_root,),
+            PageKeyboard(master=self.tk_root,),
+            PageAbout(master=self.tk_root,)
         ]
 
         self.current_page_name = None
